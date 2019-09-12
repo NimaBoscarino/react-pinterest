@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Dimmer, Loader } from 'semantic-ui-react'
 
 const Pin = ({ image }) => (
   <Card style={{
@@ -48,69 +48,61 @@ const PinColumnContainer = styled.div`
   justify-content: center;
 `
 
+const usePinLoader = () => {
+  const [pins1, setPins1] = useState([])
+  const [pins2, setPins2] = useState([])
+  const [pins3, setPins3] = useState([])
+  const [pins4, setPins4] = useState([])
+  const [pins5, setPins5] = useState([])
+
+  const fillPin = (setPin, seed) => {
+
+    setTimeout(() => {
+      const newPins = []
+      for (let i = seed; i < 500; i+=5) {
+        newPins.push(`https://source.unsplash.com/random/${i}x400?fish`)
+      }
+      setPin(newPins)
+    }, seed * 10)
+   
+  }
+  useEffect(() => {
+
+    fillPin(setPins1, 200)
+    fillPin(setPins2, 250)
+    fillPin(setPins3, 225)
+    fillPin(setPins4, 300)
+    fillPin(setPins5, 201)
+  }, [])
+
+  return [pins1, pins2, pins3, pins4, pins5]
+}
+
 const PinContainer = () => {
+  const [pins1, pins2, pins3, pins4, pins5] = usePinLoader()
+
+  // Loader...
+
   return (
     <PinColumnContainer>
       <PinColumn>
-        <Pin image={'https://source.unsplash.com/random/900x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/900x100'} >Pin!</Pin>
+        {
+          pins1.length === 0 && <Dimmer active><Loader /></Dimmer>
+        }
+        { pins1.map(p => <Pin image={p} />) }
       </PinColumn>
       <PinColumn>
-        <Pin image={'https://source.unsplash.com/random/800x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/700x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/100x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/900x100'} >Pin!</Pin>
+        { pins2.map(p => <Pin image={p} />) }
       </PinColumn>
       <PinColumn>
-        <Pin image={'https://source.unsplash.com/random/900x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x500'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/400x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/900x100'} >Pin!</Pin>
-      </PinColumn>   
-      <PinColumn>
-        <Pin image={'https://source.unsplash.com/random/900x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/900x100'} >Pin!</Pin>
+        { pins3.map(p => <Pin image={p} />) }
       </PinColumn>
       <PinColumn>
-        <Pin image={'https://source.unsplash.com/random/800x400'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/300x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/200x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/700x300'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/500x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/800x600'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/100x200'} >Pin!</Pin>
-        <Pin image={'https://source.unsplash.com/random/900x100'} >Pin!</Pin>
+        { pins4.map(p => <Pin image={p} />) }
       </PinColumn>
+      <PinColumn>
+        { pins5.map(p => <Pin image={p} />) }
+      </PinColumn>                   
     </PinColumnContainer>   
   )
 }
